@@ -1,0 +1,87 @@
+
+
+SELECT 
+    c.order_status,
+    COUNT(c.order_id) AS total_orders,
+    SUM(p.payment_amount) AS total_revenue
+FROM customer_orders c
+LEFT JOIN payments p ON c.order_id = p.order_id
+WHERE p.payment_status = 'completed'
+GROUP BY c.order_status;
+
+SELECT 
+    DATE_TRUNC('month', payment_date) AS month,
+    COUNT(payment_id) AS total_payments,
+    SUM(payment_amount) AS total_revenue
+FROM payments
+WHERE payment_status = 'completed'
+GROUP BY month
+ORDER BY month;
+
+
+SELECT 
+    DATE_TRUNC('month', c.order_date) AS month,
+    c.order_status,
+    COUNT(*) AS orders_count
+FROM customer_orders c
+GROUP BY month, c.order_status
+ORDER BY month;
+
+--Task 2: Identify customer ordering behavior, repeat orders, and trends.
+
+SELECT 
+    CASE 
+        WHEN COUNT(order_id) > 1 THEN 'Repeat Customer'
+        ELSE 'First-time Customer'
+    END AS customer_type,
+    COUNT(DISTINCT customer_id) AS number_of_customers
+FROM customer_orders
+GROUP BY customer_type;
+
+
+SELECT 
+    customer_id,
+    COUNT(order_id) AS total_orders,
+    SUM(order_amount) AS total_spent,
+    MIN(order_date) AS first_order_date,
+    MAX(order_date) AS last_order_date
+FROM customer_orders
+GROUP BY customer_id
+ORDER BY total_orders DESC;
+
+SELECT 
+    DATE_TRUNC('month', order_date) AS month,
+    COUNT(DISTINCT customer_id) AS active_customers
+FROM customer_orders
+GROUP BY month
+ORDER BY month;
+
+SELECT 
+    payment_status,
+    COUNT(*) AS total_payments,
+    ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM payments), 2) AS percentage
+FROM payments
+GROUP BY payment_status;
+
+
+SELECT 
+    c.*,
+    p.payment_id,
+    p.payment_date,
+    p.payment_method,
+    p.payment_amount,
+    p.payment_status,
+    CASE 
+        WHEN p.payment_status = 'completed' THEN 'Paid'
+        WHEN p.payment_status = 'failed' THEN 'Payment Failed'
+        ELSE 'Pending Payment'
+    END AS payment_summary
+FROM customer_orders c
+LEFT JOIN payments p ON c.order_id = p.order_id
+ORDER BY c.order_date DESC;
+
+
+
+
+
+
