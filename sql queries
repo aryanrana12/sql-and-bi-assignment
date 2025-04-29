@@ -1,5 +1,10 @@
 
+-- Task 1:  1. Order and Sales Analysis:
+  *  Analyze order status and sales data to provide insights into order
+     fulfillment and revenue trends. Identify key metrics and trends related to
+      order status and sales.
 
+-- Total orders and revenue by order status
 SELECT 
     c.order_status,
     COUNT(c.order_id) AS total_orders,
@@ -9,6 +14,7 @@ LEFT JOIN payments p ON c.order_id = p.order_id
 WHERE p.payment_status = 'completed'
 GROUP BY c.order_status;
 
+-- Monthly trends of completed status order and total revenue
 SELECT 
     DATE_TRUNC('month', payment_date) AS month,
     COUNT(payment_id) AS total_payments,
@@ -18,7 +24,7 @@ WHERE payment_status = 'completed'
 GROUP BY month
 ORDER BY month;
 
-
+-- Monthly trends of orders by order status, 
 SELECT 
     DATE_TRUNC('month', c.order_date) AS month,
     c.order_status,
@@ -28,7 +34,7 @@ GROUP BY month, c.order_status
 ORDER BY month;
 
 --Task 2: Identify customer ordering behavior, repeat orders, and trends.
-
+  --Segement customer types as repeat one or first time customers
 SELECT 
     CASE 
         WHEN COUNT(order_id) > 1 THEN 'Repeat Customer'
@@ -38,7 +44,7 @@ SELECT
 FROM customer_orders
 GROUP BY customer_type;
 
-
+--Top Customers Revealed: Most Frequent Buyers and Their Lifetime Spending
 SELECT 
     customer_id,
     COUNT(order_id) AS total_orders,
@@ -49,13 +55,17 @@ FROM customer_orders
 GROUP BY customer_id
 ORDER BY total_orders DESC;
 
+-- Monthly Active Customers: Tracking Customer Engagement Over Time
 SELECT 
     DATE_TRUNC('month', order_date) AS month,
     COUNT(DISTINCT customer_id) AS active_customers
 FROM customer_orders
 GROUP BY month
 ORDER BY month;
-
+ 
+  Task 3: Payment Status Analysis:
+* Investigate payment status data to identify any
+-- Count and percentage of each payment status
 SELECT 
     payment_status,
     COUNT(*) AS total_payments,
@@ -63,6 +73,11 @@ SELECT
 FROM payments
 GROUP BY payment_status;
 
+Task 4 :Order Details Report:
+ * Create a comprehensive report that provides a detailed overview of order
+information, payment details, and key metrics.
+
+-- Monthly Active Customers: Tracking Customer Engagement Over Time
 
 SELECT 
     c.*,
