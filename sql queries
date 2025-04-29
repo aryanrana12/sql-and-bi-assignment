@@ -64,7 +64,8 @@ GROUP BY month
 ORDER BY month;
  
   Task 3: Payment Status Analysis:
-* Investigate payment status data to identify any
+o Investigate payment status data to identify any potential issues or trends
+related to payment success and failure.
 -- Count and percentage of each payment status
 SELECT 
     payment_status,
