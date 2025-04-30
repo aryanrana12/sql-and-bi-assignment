@@ -1,0 +1,46 @@
+## Methodology
+1. **Cohort Analysis Matrix**  
+   - For each cohort, count the unique customers in month 0 (their first month), month 1, month 2, …  
+   - Build a retention matrix showing how many original customers return in each subsequent month.  
+2. **Retention & Churn Rate Calculation**  
+   - **Retention Rate** = (Total returning customers in period) / (Total customers in cohort)  
+   - **Churn Rate** = 1 − Retention Rate (plotted over time by `OrderMonth`)  
+3. **Active Customer Trend**  
+   - Count of unique active customers per `OrderMonth`.  
+4. **Cohort Size Trend**  
+   - Total customers acquired in each `CohortMonth`.
+
+   ## Dashboard Visualizations
+1. **Overall Retention Rate**  
+   - Single‐value card showing aggregate retention rate (currently 1.00).  
+2. **Cohort Retention Matrix**  
+   - A table with rows = CohortMonth and columns = months since acquisition (0, 1, 2, …), displaying counts of returning customers.  
+3. **CustomerCount by CohortMonth**  
+   - Horizontal bar chart showing cohort sizes (new customers per month).  
+4. **ActiveCustomers by OrderMonth**  
+   - Horizontal bar chart of total active customers for each recent month.  
+5. **ChurnRate by OrderMonth**  
+   - Line chart tracking the monthly churn rate trend over time.
+
+## Insights & Observations
+- **High Initial Retention**  
+  - Month-0 to Month-1 retention is strong across most cohorts (e.g., 244 → 6 in 2020-01 cohort indicates 6 retained in month-1).  
+- **Steady Decline Over Time**  
+  - As expected, each cohort’s count diminishes over subsequent months, showing normal decay in engagement.  
+- **Churn Rate Trend**  
+  - Churn rate hovers around 0.97–0.975, with a slight downward drift (improving retention) in 2021–2022, but a minor uptick in early 2023.  
+- **Acquisition Peaks & Troughs**  
+  - Largest cohort: **2020-01** (244 new customers).  
+  - Smallest: **2020-09** (163 new customers).  
+- **Recent Activity**  
+  - Active customers in mid-2023 remain around ~220 per month, suggesting stabilization after post-pandemic fluctuations.
+
+## Recommendations
+1. **Onboarding & Engagement**  
+   - Strengthen month-1 engagement (e.g., welcome offers, tutorials) to convert initial curious buyers into repeat customers.  
+2. **Re-engagement Campaigns**  
+   - Target customers who dropped off in months 2–4 with tailored promotions or content reminders.  
+3. **Cohort-Specific Analysis**  
+   - Investigate why younger cohorts (e.g., 2020-08, 2020-09) have sharper drop-offs; adjust acquisition channels or post-purchase follow-up.  
+4. **Monitor Churn Drivers**  
+   - Perform root-cause analysis on service issues, product gaps, or pricing triggers coinciding with churn upticks in early 2023.  
